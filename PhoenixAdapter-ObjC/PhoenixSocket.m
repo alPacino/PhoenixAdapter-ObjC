@@ -8,6 +8,7 @@
 
 #import "PhoenixSocket.h"
 #import "PhoenixChannel.h"
+#import <SocketRocket/SRWebSocket.h>
 
 const int reconnectSeconds = 5;
 const int flushEverySeconds = 0.5;
@@ -149,6 +150,9 @@ const int flushEverySeconds = 0.5;
         self.reconnectTimer = nil;
     }
     [self rejoinAll];
+    if ([self.delegate respondsToSelector:@selector(phoenixDidConnect)]) {
+        [self.delegate phoenixDidConnect];
+    }
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
@@ -166,6 +170,9 @@ const int flushEverySeconds = 0.5;
         self.reconnectTimer = nil;
     }
     self.reconnectTimer = [NSTimer scheduledTimerWithTimeInterval:reconnectSeconds target:self selector:@selector(reconnect) userInfo:nil repeats:YES];
+    if ([self.delegate respondsToSelector:@selector(phoenixDidDisconnect)]) {
+        [self.delegate phoenixDidDisconnect];
+    }
 }
 
 @end

@@ -7,9 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "PhoenixAdapter.h"
+
 @interface ViewController : NSViewController
 
+@property (nonatomic, retain) IBOutlet NSTextField *urlField;
+@property (nonatomic, retain) IBOutlet NSButton *connectButton;
+@property (nonatomic, retain) IBOutlet NSTextView *outputTextView;
 
 @end
 

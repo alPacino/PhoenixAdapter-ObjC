@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PhoenixSocket.h"
+#import "PhoenixChannel.h"
 
 
 //! Project version number for PhoenixAdapter-ObjC.

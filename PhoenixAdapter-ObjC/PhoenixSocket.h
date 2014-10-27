@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SocketRocket/SRWebSocket.h>
 
 typedef enum {
     ConnectingState,
@@ -16,7 +15,16 @@ typedef enum {
     ClosedState
 } ConnectionState;
 
+@protocol PhoenixSocketDelegate <NSObject>
+
+- (void)phoenixDidConnect;
+- (void)phoenixDidDisconnect;
+
+@end
+
 @interface PhoenixSocket : NSObject
+
+@property (weak, nonatomic) id<PhoenixSocketDelegate> delegate;
 
 - (id)initWithURL:(NSURL*)url;
 - (ConnectionState)connectionState;

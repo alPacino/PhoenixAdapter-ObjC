@@ -22,6 +22,7 @@
 		C808F29819FED34000DA3E22 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C808F29719FED34000DA3E22 /* Images.xcassets */; };
 		C808F29B19FED34000DA3E22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C808F29919FED34000DA3E22 /* Main.storyboard */; };
 		C808F2A719FED34000DA3E22 /* ChannelDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C808F2A619FED34000DA3E22 /* ChannelDemoTests.m */; };
+		C808F2B019FED91900DA3E22 /* PhoenixAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C808F23F19FED16F00DA3E22 /* PhoenixAdapter.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = C808F28A19FED34000DA3E22;
 			remoteInfo = ChannelDemo;
+		};
+		C808F2AE19FED91000DA3E22 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C808F23619FED16F00DA3E22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C808F23E19FED16F00DA3E22;
+			remoteInfo = PhoenixAdapter;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -90,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C808F2B019FED91900DA3E22 /* PhoenixAdapter.framework in Frameworks */,
 				15EA8AB13F188812DA0641DE /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,6 +299,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C808F2AF19FED91000DA3E22 /* PBXTargetDependency */,
 			);
 			name = ChannelDemo;
 			productName = ChannelDemo;
@@ -503,6 +513,11 @@
 			isa = PBXTargetDependency;
 			target = C808F28A19FED34000DA3E22 /* ChannelDemo */;
 			targetProxy = C808F2A119FED34000DA3E22 /* PBXContainerItemProxy */;
+		};
+		C808F2AF19FED91000DA3E22 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C808F23E19FED16F00DA3E22 /* PhoenixAdapter */;
+			targetProxy = C808F2AE19FED91000DA3E22 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
