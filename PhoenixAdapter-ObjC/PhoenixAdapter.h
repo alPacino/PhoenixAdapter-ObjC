@@ -7,6 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "PhoenixSocket.h"
+
 
 //! Project version number for PhoenixAdapter-ObjC.
 FOUNDATION_EXPORT double PhoenixAdapter_ObjCVersionNumber;

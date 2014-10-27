@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import "PhoenixAdapter.h"
 @interface ViewController : NSViewController
 
 
