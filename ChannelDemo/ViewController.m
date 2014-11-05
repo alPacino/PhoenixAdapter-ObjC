@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "PhoenixSocket.h"
+#import "PhoenixChannel.h"
 
 @interface ViewController () <PhoenixSocketDelegate> {
     PhoenixSocket *_socket;
@@ -45,6 +46,31 @@
         // TODO NSAlert empty url field
     }
     
+}
+
+- (IBAction)joinChannel:(id)sender {
+    NSLog(@"Join Channel");
+    NSString *channelString = self.channelField.stringValue;
+    NSString *topicString = self.topicField.stringValue;
+    if (channelString.length > 0 || topicString.length > 0) {
+        NSString *channelMsgString = self.channelMsgField.stringValue;
+        NSDictionary *channelMsgDict;
+        if (channelMsgString.length > 0) {
+
+            NSData *data = [channelMsgString dataUsingEncoding:NSUTF8StringEncoding];
+            id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            if ([json isKindOfClass:[NSDictionary class]]) {
+                channelMsgDict = json;
+            }
+        }
+        [_socket joinChannel:channelString topic:topicString message:channelMsgDict callback:^(PhoenixChannel *chan) {
+            [chan onEvent:@"join" callback:^(NSString *message) {
+                NSLog(@"Join Message:%@",message);
+            }];
+        }];
+    } else {
+        // Empty Channel or Topic String
+    }
 }
 
 #pragma mark PhoenixSocketDelegate

@@ -55,7 +55,7 @@
 		C808F23F19FED16F00DA3E22 /* PhoenixAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PhoenixAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C808F24319FED16F00DA3E22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C808F24419FED16F00DA3E22 /* PhoenixAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoenixAdapter.h; sourceTree = "<group>"; };
-		C808F24A19FED16F00DA3E22 /* PhoenixAdapter-ObjCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "PhoenixAdapter-ObjCTests.xctest"; path = PhoenixAdapterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C808F24A19FED16F00DA3E22 /* PhoenixAdapterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhoenixAdapterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C808F25019FED16F00DA3E22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C808F25119FED16F00DA3E22 /* PhoenixAdapter_ObjCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoenixAdapter_ObjCTests.m; sourceTree = "<group>"; };
 		C808F25B19FED20800DA3E22 /* PhoenixChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoenixChannel.h; sourceTree = "<group>"; };
@@ -147,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				C808F23F19FED16F00DA3E22 /* PhoenixAdapter.framework */,
-				C808F24A19FED16F00DA3E22 /* PhoenixAdapter-ObjCTests.xctest */,
+				C808F24A19FED16F00DA3E22 /* PhoenixAdapterTests.xctest */,
 				C808F28B19FED34000DA3E22 /* ChannelDemo.app */,
 				C808F2A019FED34000DA3E22 /* ChannelDemoTests.xctest */,
 			);
@@ -283,7 +283,7 @@
 			);
 			name = PhoenixAdapterTests;
 			productName = "PhoenixAdapter-ObjCTests";
-			productReference = C808F24A19FED16F00DA3E22 /* PhoenixAdapter-ObjCTests.xctest */;
+			productReference = C808F24A19FED16F00DA3E22 /* PhoenixAdapterTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		C808F28A19FED34000DA3E22 /* ChannelDemo */ = {

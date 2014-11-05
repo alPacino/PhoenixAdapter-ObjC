@@ -14,5 +14,10 @@
 @property (nonatomic, retain) IBOutlet NSButton *connectButton;
 @property (nonatomic, retain) IBOutlet NSTextView *outputTextView;
 
+@property (nonatomic, retain) IBOutlet NSTextField *channelField;
+@property (nonatomic, retain) IBOutlet NSTextField *topicField;
+@property (nonatomic, retain) IBOutlet NSTextField *channelMsgField;
+@property (nonatomic, retain) IBOutlet NSButton *channelJoinButton;
+
 @end
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PhoenixChannel.h"
 
 typedef enum {
     ConnectingState,
@@ -30,7 +31,16 @@ typedef enum {
 - (ConnectionState)connectionState;
 - (BOOL)isConnected;
 - (void)reconnect;
+- (void)send:(NSDictionary*)payload;
 - (void)close;
-- (void)join:(NSString*)channel topic:(NSString*)topic message:(NSDictionary*)message;
+
+- (void)joinChannel:(NSString*)channel
+       topic:(NSString*)topic
+     message:(NSDictionary*)message
+    callback:(ChannelCallback)callback;
+
+- (void)leaveChannel:(NSString*)channel
+               topic:(NSString*)topic
+             message:(NSString*)message;
 
 @end

@@ -80,6 +80,20 @@ const int flushEverySeconds = 0.5;
     }
 }
 
+- (void)message:(NSDictionary*)msg {
+    NSString *channel = [msg valueForKey:@"channel"];
+    NSString *topic = [msg valueForKey:@"topic"];
+    NSString *event = [msg valueForKey:@"event"];
+    NSString *message = [msg valueForKey:@"message"];
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(PhoenixChannel *chan, NSDictionary *bindings) {
+        return [chan.channel isEqualToString:channel] && [chan.topic isEqualToString:topic];
+    }];
+    NSArray *channels = [self.channels filteredArrayUsingPredicate:predicate];
+    for (PhoenixChannel *chan in channels) {
+        [chan triggerEvent:event message:message];
+    }
+}
+
 - (void)send:(NSDictionary*)data {
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&error];
@@ -99,11 +113,11 @@ const int flushEverySeconds = 0.5;
 
 - (void)rejoinAll {
     for (PhoenixChannel *channel in self.channels) {
-        [self rejoin:channel];
+        [self rejoinChannel:channel];
     }
 }
 
-- (void)rejoin:(PhoenixChannel*)pChannel {
+- (void)rejoinChannel:(PhoenixChannel*)pChannel {
     NSString *channel = pChannel.channel;
     NSString *topic = pChannel.topic;
     NSMutableDictionary *message = [NSMutableDictionary new];
@@ -113,11 +127,24 @@ const int flushEverySeconds = 0.5;
     [self send:payload];
 }
 
-- (void)join:(NSString*)channel topic:(NSString*)topic message:(NSDictionary*)message {
-    PhoenixChannel *pChannel = [[PhoenixChannel alloc]initWithChannel:channel topic:topic message:message];
+- (void)joinChannel:(NSString*)channel topic:(NSString*)topic message:(NSDictionary*)message callback:(ChannelCallback)callback {
+    PhoenixChannel *pChannel = [[PhoenixChannel alloc]initWithChannel:channel topic:topic message:message socket:self callback:callback];
     [self.channels addObject:pChannel];
     if ([self isConnected]) {
-        [self rejoin:pChannel];
+        [self rejoinChannel:pChannel];
+    }
+    callback(pChannel);
+}
+
+- (void)leaveChannel:(NSString *)channel topic:(NSString *)topic message:(NSString *)message {
+    NSDictionary *payload = @{@"channel":channel, @"topic":topic, @"event":@"leave", @"message":message};
+    [self send:payload];
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(PhoenixChannel* chan, NSDictionary *bindings) {
+        return [chan.channel isEqualToString:channel] && [chan.topic isEqualToString:topic];
+    }];
+    NSArray *channels = [self.channels filteredArrayUsingPredicate:predicate];
+    for (PhoenixChannel *chan in channels) {
+        [self.channels removeObject:chan];
     }
 }
 
@@ -157,6 +184,12 @@ const int flushEverySeconds = 0.5;
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
     NSLog(@"Websocket Message:%@",(NSString*)message);
+    NSData *data = [message dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+    id json = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+    if (!error) {
+        [self message:json];
+    }
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
