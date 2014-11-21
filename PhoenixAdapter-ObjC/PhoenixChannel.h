@@ -11,7 +11,7 @@
 @class PhoenixSocket;
 @class PhoenixChannel;
 
-typedef void (^Callback)(NSString* message);
+typedef void (^Callback)(id message);
 typedef void (^ChannelCallback)(PhoenixChannel* chan);
 
 @interface PhoenixChannel : NSObject
@@ -35,6 +35,9 @@ typedef void (^ChannelCallback)(PhoenixChannel* chan);
 - (void)leave:(NSString*)message;
 
 - (void)triggerEvent:(NSString*)event message:(NSString*)message;
+
+- (void)sendEvent:(NSString *)event
+           object:(id)object;
 
 - (void)sendEvent:(NSString*)event
           message:(NSString*)message;

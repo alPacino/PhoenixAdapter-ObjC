@@ -127,13 +127,14 @@ const int flushEverySeconds = 0.5;
     [self send:payload];
 }
 
-- (void)joinChannel:(NSString*)channel topic:(NSString*)topic message:(NSDictionary*)message callback:(ChannelCallback)callback {
+- (PhoenixChannel*)joinChannel:(NSString*)channel topic:(NSString*)topic message:(NSDictionary*)message callback:(ChannelCallback)callback {
     PhoenixChannel *pChannel = [[PhoenixChannel alloc]initWithChannel:channel topic:topic message:message socket:self callback:callback];
     [self.channels addObject:pChannel];
     if ([self isConnected]) {
         [self rejoinChannel:pChannel];
     }
     callback(pChannel);
+    return pChannel;
 }
 
 - (void)leaveChannel:(NSString *)channel topic:(NSString *)topic message:(NSString *)message {
@@ -198,11 +199,14 @@ const int flushEverySeconds = 0.5;
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
     NSLog(@"WebSocket Closed");
-    if (self.reconnectTimer) {
-        [self.reconnectTimer invalidate];
-        self.reconnectTimer = nil;
+    if (self.reconnectOnError) {
+        if (self.reconnectTimer) {
+            [self.reconnectTimer invalidate];
+            self.reconnectTimer = nil;
+        }
+        self.reconnectTimer = [NSTimer scheduledTimerWithTimeInterval:reconnectSeconds target:self selector:@selector(reconnect) userInfo:nil repeats:YES];
     }
-    self.reconnectTimer = [NSTimer scheduledTimerWithTimeInterval:reconnectSeconds target:self selector:@selector(reconnect) userInfo:nil repeats:YES];
+    
     if ([self.delegate respondsToSelector:@selector(phoenixDidDisconnect)]) {
         [self.delegate phoenixDidDisconnect];
     }

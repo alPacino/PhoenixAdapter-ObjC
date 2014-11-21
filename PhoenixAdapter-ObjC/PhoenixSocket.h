@@ -26,15 +26,17 @@ typedef enum {
 @interface PhoenixSocket : NSObject
 
 @property (weak, nonatomic) id<PhoenixSocketDelegate> delegate;
+@property (nonatomic, readwrite) BOOL reconnectOnError;
 
 - (id)initWithURL:(NSURL*)url;
+
 - (ConnectionState)connectionState;
 - (BOOL)isConnected;
 - (void)reconnect;
 - (void)send:(NSDictionary*)payload;
 - (void)close;
 
-- (void)joinChannel:(NSString*)channel
+- (PhoenixChannel*)joinChannel:(NSString*)channel
        topic:(NSString*)topic
      message:(NSDictionary*)message
     callback:(ChannelCallback)callback;
