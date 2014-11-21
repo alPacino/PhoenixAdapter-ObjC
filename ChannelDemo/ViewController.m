@@ -67,6 +67,10 @@
             [chan onEvent:@"join" callback:^(NSString *message) {
                 NSLog(@"Join Message:%@",message);
             }];
+            
+            [chan onEvent:@"message:new" callback:^(NSString *message) {
+                NSLog(@"New Message:%@",message);
+            }];
         }];
     } else {
         // Empty Channel or Topic String

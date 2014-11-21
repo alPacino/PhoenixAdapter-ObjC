@@ -12,9 +12,9 @@
 		C808F24519FED16F00DA3E22 /* PhoenixAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = C808F24419FED16F00DA3E22 /* PhoenixAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C808F24B19FED16F00DA3E22 /* PhoenixAdapter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C808F23F19FED16F00DA3E22 /* PhoenixAdapter.framework */; };
 		C808F25219FED16F00DA3E22 /* PhoenixAdapter_ObjCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C808F25119FED16F00DA3E22 /* PhoenixAdapter_ObjCTests.m */; };
-		C808F25F19FED20800DA3E22 /* PhoenixChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = C808F25B19FED20800DA3E22 /* PhoenixChannel.h */; };
+		C808F25F19FED20800DA3E22 /* PhoenixChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = C808F25B19FED20800DA3E22 /* PhoenixChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C808F26019FED20800DA3E22 /* PhoenixChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = C808F25C19FED20800DA3E22 /* PhoenixChannel.m */; };
-		C808F26119FED20800DA3E22 /* PhoenixSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = C808F25D19FED20800DA3E22 /* PhoenixSocket.h */; };
+		C808F26119FED20800DA3E22 /* PhoenixSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = C808F25D19FED20800DA3E22 /* PhoenixSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C808F26219FED20800DA3E22 /* PhoenixSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = C808F25E19FED20800DA3E22 /* PhoenixSocket.m */; };
 		C808F29119FED34000DA3E22 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C808F29019FED34000DA3E22 /* AppDelegate.m */; };
 		C808F29319FED34000DA3E22 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C808F29219FED34000DA3E22 /* main.m */; };

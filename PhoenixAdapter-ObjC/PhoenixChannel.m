@@ -29,7 +29,12 @@
     }
     return self;
 }
-
+- (void)sendEvent:(NSString *)event object:(id)object {
+    NSDictionary *payload = @{@"channel":self.channel, @"topic":self.topic, @"event":event, @"message":object};
+    if (self.socket) {
+        [self.socket send:payload];
+    }
+}
 
 - (void)sendEvent:(NSString*)event message:(NSString*)message {
     NSDictionary *payload = @{@"channel":self.channel, @"topic":self.topic, @"event":event, @"message":message};
