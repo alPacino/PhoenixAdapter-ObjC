@@ -29,6 +29,7 @@ typedef enum {
 @property (nonatomic, readwrite) BOOL reconnectOnError;
 
 - (id)initWithURL:(NSURL*)url;
+- (id)initWithURL:(NSURL*)url heartbeatInterval:(int)interval;
 
 - (ConnectionState)connectionState;
 - (BOOL)isConnected;
