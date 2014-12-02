@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "PhoenixAdapter"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "Phoenix Framework Channel Client"
 
   s.description  = <<-DESC
@@ -58,11 +58,11 @@ Pod::Spec.new do |s|
   #
 
   # s.platform     = :ios
-  # s.platform     = :ios, "6.0"
+  s.platform     = :osx, "10.7"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
-  s.osx.deployment_target = "10.7"
+  # s.osx.deployment_target = "10.7"
 
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -71,7 +71,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "http://github.com/livehelpnow/PhoenixAdapter-ObjC.git", :tag => "0.1.1" }
+  s.source       = { :git => "https://github.com/livehelpnow/PhoenixAdapter-ObjC.git", :tag => "0.1.2" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -82,10 +82,10 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Classes", "Classes/**/*.{h,m}"
-  s.exclude_files = "Classes/Exclude"
+  s.source_files  = "PhoenixAdapter-ObjC/*.{h,m}"
+  # s.exclude_files = "Classes/Exclude"
 
-  # s.public_header_files = "Classes/**/*.h"
+  s.public_header_files = "PhoenixAdapter-ObjC/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -109,7 +109,7 @@ Pod::Spec.new do |s|
   #
 
   # s.framework  = "SomeFramework"
-  s.frameworks = "PhoenixAdapter", "ChannelDemo"
+  # s.frameworks = "PhoenixAdapter", "ChannelDemo"
 
   # s.library   = "iconv"
   # s.libraries = "iconv", "xml2"
@@ -124,6 +124,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "SocketRocket"
+  s.dependency "SocketRocket", "0.3.1-beta2"
 
 end
