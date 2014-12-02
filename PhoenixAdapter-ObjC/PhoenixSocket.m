@@ -17,6 +17,7 @@ const int flushEverySeconds = 0.5;
 
 @property (nonatomic, retain) SRWebSocket *socket;
 @property (nonatomic, retain) NSURL *URL;
+@property (nonatomic, assign) int heartbeatInterval;
 @property (nonatomic) ConnectionState connectionState;
 
 @property (nonatomic, retain) NSMutableArray *channels;
@@ -25,14 +26,22 @@ const int flushEverySeconds = 0.5;
 @property (nonatomic, retain) NSTimer *sendBufferTimer;
 @property (nonatomic, retain) NSTimer *reconnectTimer;
 
+@property (nonatomic, retain) NSTimer *heartbeatTimer;
+
+
 @end
 
 @implementation PhoenixSocket
 
 - (id)initWithURL:(NSURL*)url {
+    return [self initWithURL:url heartbeatInterval:0];
+}
+
+- (id)initWithURL:(NSURL*)url heartbeatInterval:(int)interval {
     self = [super init];
     if (self) {
         self.URL = url;
+        self.heartbeatInterval = interval;
         self.channels = [NSMutableArray new];
         self.sendBuffer = [NSMutableArray new];
         [self resetBufferTimer];
@@ -169,6 +178,16 @@ const int flushEverySeconds = 0.5;
     }
 }
 
+#pragma marl - Phoenix Channel
+
+- (void)startHeartbeatWithInterval:(int)interval {
+    self.heartbeatTimer = [NSTimer scheduledTimerWithTimeInterval:interval target:self selector:@selector(sendHeartbeat) userInfo:nil repeats:YES];
+}
+
+- (void)sendHeartbeat {
+    [self send:@{@"channel":@"phoenix", @"topic":@"chan", @"event":@"heartbeat", @"message":@{}}];
+}
+
 #pragma mark - SRWebSocket Delegate
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket {
@@ -176,6 +195,9 @@ const int flushEverySeconds = 0.5;
     if (self.reconnectTimer) {
         [self.reconnectTimer invalidate];
         self.reconnectTimer = nil;
+    }
+    if (self.heartbeatInterval > 0) {
+        [self startHeartbeatWithInterval:self.heartbeatInterval];
     }
     [self rejoinAll];
     if ([self.delegate respondsToSelector:@selector(phoenixDidConnect)]) {
