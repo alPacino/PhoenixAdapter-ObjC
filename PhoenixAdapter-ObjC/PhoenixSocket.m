@@ -217,6 +217,17 @@ const int flushEverySeconds = 0.5;
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
     NSLog(@"WebSocket Failed with Error: %@", [error localizedDescription]);
+    [self close];
+    if (self.reconnectOnError) {
+        if (self.reconnectTimer) {
+            [self.reconnectTimer invalidate];
+            self.reconnectTimer = nil;
+        }
+        self.reconnectTimer = [NSTimer scheduledTimerWithTimeInterval:reconnectSeconds target:self selector:@selector(reconnect) userInfo:nil repeats:YES];
+    }
+    if ([self.delegate respondsToSelector:@selector(phoenixDidDisconnect)]) {
+        [self.delegate phoenixDidDisconnect];
+    }
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
