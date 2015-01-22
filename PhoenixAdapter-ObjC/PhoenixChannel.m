@@ -48,7 +48,10 @@
 }
 
 - (void)offEvent:(NSString*)event {
-    
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary* binding, NSDictionary *bindings) {
+        return ![[binding valueForKey:@"event"] isEqualToString:event];
+    }];
+    [self.bindings setArray:[self.bindings filteredArrayUsingPredicate:predicate]];
 }
 
 - (void)triggerEvent:(NSString*)event message:(NSString*)message {
